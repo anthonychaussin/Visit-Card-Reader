@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Visit Card Reader</name>
+    </assembly>
+    <members>
+        <member name="T:Visit_Card_Reader.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:Visit_Card_Reader.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:Visit_Card_Reader.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:Visit_Card_Reader.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="E:Visit_Card_Reader.MainWindow.PropertyChanged">
+            <summary>
+            Event when a property change
+            </summary>
+        </member>
+        <member name="M:Visit_Card_Reader.MainWindow.OnPropertyChanged(System.String)">
+            <summary>
+            Treat the event of a property change
+            </summary>
+            <param name="name"> Name of the property </param>
+        </member>
+        <member name="M:Visit_Card_Reader.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Visit_Card_Reader.VisitCard">
+            <summary>
+            Logique d'interaction pour VisitCard.xaml
+            </summary>
+            <summary>
+            VisitCard
+            </summary>
+        </member>
+        <member name="E:Visit_Card_Reader.VisitCard.PropertyChanged">
+            <summary>
+            Event when a property change
+            </summary>
+        </member>
+        <member name="M:Visit_Card_Reader.VisitCard.OnPropertyChanged(System.String)">
+            <summary>
+            Treat the event of a property change
+            </summary>
+            <param name="name"> Name of the property </param>
+        </member>
+        <member name="M:Visit_Card_Reader.VisitCard.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

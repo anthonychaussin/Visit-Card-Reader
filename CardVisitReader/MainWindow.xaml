@@ -1,0 +1,60 @@
+﻿<Window x:Class="CardVisitReader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CardVisitReader"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Fichier">
+                <MenuItem x:Name="CreateCSV" Header="Générer le fichier de résultat" Click="MenuItem_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Configuration">
+                <MenuItem x:Name="Picture" Header="Répertoire photo" Click="MenuItem_Click"></MenuItem>
+                <MenuItem x:Name="CSV" Header="Emplacement du résultat" Click="MenuItem_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <GroupBox Grid.Row="1" Header="Liste des photo">
+            <ListView x:Name="CardList"></ListView>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Données trouvées">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding CName, StringFormat=Nom : {0}}"></Label>
+                <Label Content="{Binding Entreprise, StringFormat=Entreprise : {0}}" Grid.Column="1"></Label>
+                <Label Content="{Binding Email, StringFormat=Email : {0}}" Grid.Row="1"></Label>
+                <Label Content="{Binding Phone, StringFormat=Téléphone : {0}}" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Content="{Binding Adresse, StringFormat=Addresse : {0}}" Grid.Row="2"></Label>
+                <Label Content="{Binding Web, StringFormat=Site-Web : {0}}" Grid.Row="2" Grid.Column="1"></Label>
+                <Label Content="{Binding Twiter, StringFormat=Twiter : {0}}" Grid.Row="3"></Label>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
