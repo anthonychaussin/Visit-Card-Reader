@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="VisitCardReader" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -36,9 +36,11 @@
             <ListView x:Name="CardList"></ListView>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Données trouvées">
-            <Grid>
+            <Grid VerticalAlignment="Top" Margin="0,5">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -47,13 +49,20 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Content="{Binding CName, StringFormat=Nom : {0}}"></Label>
-                <Label Content="{Binding Entreprise, StringFormat=Entreprise : {0}}" Grid.Column="1"></Label>
-                <Label Content="{Binding Email, StringFormat=Email : {0}}" Grid.Row="1"></Label>
-                <Label Content="{Binding Phone, StringFormat=Téléphone : {0}}" Grid.Row="1" Grid.Column="1"></Label>
-                <Label Content="{Binding Adresse, StringFormat=Addresse : {0}}" Grid.Row="2"></Label>
-                <Label Content="{Binding Web, StringFormat=Site-Web : {0}}" Grid.Row="2" Grid.Column="1"></Label>
-                <Label Content="{Binding Twiter, StringFormat=Twiter : {0}}" Grid.Row="3"></Label>
+                <TextBlock Text="Nom" VerticalAlignment="Bottom" />
+                <TextBox Grid.Column="1" Text="{Binding CName}" Margin="10,0"></TextBox>
+                <TextBlock Grid.Column="2" Text="Entreprise" VerticalAlignment="Bottom" ></TextBlock>
+                <TextBox Grid.Column="3" Text="{Binding Entreprise}" Margin="10,0"></TextBox>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Email" VerticalAlignment="Bottom" ></TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Email}" Margin="10,0"></TextBox>
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="Téléphone" VerticalAlignment="Bottom"  ></TextBlock>
+                <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Phone}" Margin="10,0"></TextBox>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Addresse" VerticalAlignment="Bottom" ></TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Adresse}" Margin="10,0"></TextBox>
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="Site-Web" VerticalAlignment="Bottom"  ></TextBlock>
+                <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding Web}" Margin="10,0"></TextBox>
+                <!--<TextBlock Grid.Column="0" Grid.Row="3" Text="Twiter" VerticalAlignment="Bottom" ></TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Twiter}" Margin="0,0,15,0"></TextBox>-->
             </Grid>
         </GroupBox>
     </Grid>

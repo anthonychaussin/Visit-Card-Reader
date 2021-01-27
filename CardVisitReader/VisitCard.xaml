@@ -17,8 +17,8 @@
     <materialDesign:Card MouseLeftButtonDown="Card_MouseLeftButtonDown">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="3.5*"></RowDefinition>
             </Grid.RowDefinitions>
             <Image Source="{Binding File}" MaxHeight="200"></Image>
             <Grid Grid.Row="1">
@@ -32,13 +32,13 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Content="{Binding CName}"></Label>
-                <Label Content="{Binding Entreprise}" Grid.Column="1"></Label>
-                <Label Content="{Binding Email}" Grid.Row="1"></Label>
-                <Label Content="{Binding Phone}" Grid.Row="1" Grid.Column="1"></Label>
-                <Label Content="{Binding Adresse}" Grid.Row="2"></Label>
-                <Label Content="{Binding Web}" Grid.Row="2" Grid.Column="1"></Label>
-                <Label Content="{Binding Twiter}" Grid.Row="3"></Label>
+                <TextBlock Text="{Binding CName}"></TextBlock>
+                <TextBlock Text="{Binding Entreprise}" Grid.Column="1"></TextBlock>
+                <TextBlock Text="{Binding Email}" Grid.Row="1"></TextBlock>
+                <TextBlock Text="{Binding Phone}" Grid.Row="1" Grid.Column="1"></TextBlock>
+                <TextBlock Text="{Binding Adresse}" Grid.Row="2"></TextBlock>
+                <TextBlock Text="{Binding Web}" Grid.Row="2" Grid.Column="1"></TextBlock>
+                <TextBlock Text="{Binding Twiter}" Grid.Row="3"></TextBlock>
             </Grid>
         </Grid>
     </materialDesign:Card>

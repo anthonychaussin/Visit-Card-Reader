@@ -17,28 +17,144 @@ namespace CardVisitReader
     public partial class VisitCard : UserControl, INotifyPropertyChanged
     {
         private string text;
+        private string entreprise;
+        private string phone;
+        private string email;
+        private string web;
+        private string cname;
+        private string adresse;
 
         public string File { get { return PictureFile.FullName; } }
-        public string CName { get { return Regex.Match(this.Text + "", @"([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)").Value.Split('\n')[0]; } }
-        public string Email { get { return Regex.Match(this.Text + "", @"[\w-\.]+@([\w-]+\.)+[\w-]{2,4}").Value.Split('\n')[0]; } }
-        public string Phone { get { return Regex.Match(this.Text + "", @"[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*").Value.Split('\n')[0]; } }
-        public string Adresse { get; set; }
-        public string Web { get { return Regex.Match(this.Text + "", @"(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+").Value.Replace("@", ".").Split('\n')[0]; } }
-        public string Twiter { get; set; }
+        public string CName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.cname))
+                {
+                    return Regex.Match(this.Text + "", @"([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)").Value.Split('\n')[0];
+                }
+                else
+                {
+                    return this.cname;
+                }
+            }
+            set
+            {
+                this.cname = value;
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.email))
+                {
+                    return Regex.Match(this.Text + "", @"[\w-\.]+@([\w-]+\.)+[\w-]{2,4}").Value.Split('\n')[0];
+                }
+                else
+                {
+                    return email;
+                }
+            }
+            set
+            {
+                this.email = value;
+            }
+        }
+        public string Phone
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.phone))
+                {
+                    return Regex.Match(this.Text + "", @"[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*").Value.Split('\n')[0];
+                }
+                else
+                {
+                    return phone;
+                }
+            }
+            set
+            {
+                this.phone = value;
+            }
+        }
+        public string Adresse
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.adresse))
+                {
+                    return Regex.Match(this.Text + "", @".*\d{1,3}.*[\n ,]\d{4,5}([- ]\d{4,5})? [^\n]+([\n ,](France|Suisse|Allemagne|Italie|Germany|Deutschland|Italia))?").Value.Replace("\n", ", ");
+                }
+                else
+                {
+                    return this.adresse;
+                }
+            }
+            set
+            {
+                this.adresse = value;
+            }
+        }
+        public string Web
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.web))
+                {
+                    return Regex.Match(this.Text + "", @"(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+").Value.Replace("@", ".").Split('\n')[0];
+                }
+                else
+                {
+                    return this.web;
+                }
+            }
+            set
+            {
+                this.web = value;
+            }
+        }
+        public string Twiter
+        {
+            get;
+            set;
+        }
 
         public string Entreprise
         {
             get
             {
-                List<string> lines = this.Text?.Split('\n')?.ToList();
-                if (lines != null && lines.Count > 0)
+                if (string.IsNullOrEmpty(this.entreprise))
                 {
-                    return lines[lines.IndexOf(lines.Where(l => l.Contains(this.CName)).First()) + 1];
+                    List<string> lines = this.Text?.Split('\n')?.ToList();
+                    if (lines != null && lines.Count > 0)
+                    {
+                        string firstTry = lines[lines.IndexOf(lines.Where(l => l.Contains(this.CName)).First()) + 1];
+                        if (string.IsNullOrEmpty(firstTry) && !string.IsNullOrEmpty(this.Email))
+                        {
+                            string domain = this.Email.Split('@')[1];
+                            return domain.Substring(0, domain.LastIndexOf('.'));
+                        }
+                        else
+                        {
+                            return firstTry;
+                        }
+                    }
+                    else
+                    {
+                        return "";
+                    }
                 }
                 else
                 {
-                    return "";
+                    return this.entreprise;
                 }
+
+            }
+            set
+            {
+                this.entreprise = value;
             }
         }
 
@@ -89,7 +205,7 @@ namespace CardVisitReader
                                 {
                                     try
                                     {
-                                        this.Text = page.GetText();
+                                        this.Text = page.GetText().Replace(" | ", "\n");
                                     }
                                     catch (Exception e)
                                     {

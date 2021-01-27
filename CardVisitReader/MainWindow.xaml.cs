@@ -16,13 +16,13 @@ namespace CardVisitReader
     {
         private VisitCard selectedCard;
 
-        public string Entreprise { get { return this.SelectedCard?.Entreprise; } }
-        public string CName { get { return this.SelectedCard?.CName; } }
-        public string Email { get { return this.SelectedCard?.Email; } }
-        public string Phone { get { return this.SelectedCard?.Phone; } }
-        public string Adresse { get { return this.SelectedCard?.Adresse; } }
-        public string Web { get { return this.SelectedCard?.Web; } }
-        public string Twiter { get { return this.SelectedCard?.Twiter; } }
+        public string Entreprise { get { return this.SelectedCard?.Entreprise; } set { this.SelectedCard.Entreprise = value; this.OnPropertyChanged(nameof(this.Entreprise)); } }
+        public string CName { get { return this.SelectedCard?.CName; } set { this.SelectedCard.CName = value; this.OnPropertyChanged(nameof(this.CName)); } }
+        public string Email { get { return this.SelectedCard?.Email; } set { this.SelectedCard.Email = value; this.OnPropertyChanged(nameof(this.Email)); } }
+        public string Phone { get { return this.SelectedCard?.Phone; } set { this.SelectedCard.Phone = value; this.OnPropertyChanged(nameof(this.Phone)); } }
+        public string Adresse { get { return this.SelectedCard?.Adresse; } set { this.SelectedCard.Adresse = value; this.OnPropertyChanged(nameof(this.Adresse)); } }
+        public string Web { get { return this.SelectedCard?.Web; } set { this.SelectedCard.Web = value; this.OnPropertyChanged(nameof(this.Web)); } }
+        public string Twiter { get { return this.SelectedCard?.Twiter; } set { this.SelectedCard.Twiter = value; this.OnPropertyChanged(nameof(this.Twiter)); } }
 
         public VisitCard SelectedCard
         {
@@ -121,7 +121,7 @@ namespace CardVisitReader
             {
                 List<string> finalLines = new List<string>();
                 Mouse.OverrideCursor = Cursors.Wait;
-                this.CardList.Items.OfType<VisitCard>().ToList().ForEach(c => c.ForceLoad());
+                this.CardList.Items.OfType<VisitCard>().Where(v=>!v.IsLoaded).ToList().ForEach(c => c.ForceLoad());
                 string firstLine = "Nom;Entreprise;Email;Phone;Web;Image";
                 List<string> lines = this.CardList.Items.OfType<VisitCard>().ToList().ConvertAll(c => c.CName.Replace("\n", "").Replace(";", ",") + ";" + c.Entreprise.Replace("\n", "").Replace(";", ",") + ";" + c.Email.Replace("\n", "").Replace(";", ",") + ";" + c.Phone.Replace("\n", "").Replace(";", ",") + ";" + c.Web.Replace("\n", "").Replace(";", ",") + ";" + c.File);
                 if (File.Exists(this.CSVFilePath))
@@ -150,6 +150,14 @@ namespace CardVisitReader
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(this.FolderPicturePath))
+            {
+                this.LoadCards();
+            }
         }
     }
 }
